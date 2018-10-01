@@ -72,7 +72,7 @@ resources:
 
 # PCF Environments
 
-- name: pcf-stage
+- name: cf-stage
   type: cf
   source:
     api: ((pcf-stage-api))
@@ -82,7 +82,7 @@ resources:
     space: ((pcf-stage-space))
     skip_cert_check: false
 
-- name: pcf-production
+- name: cf-production
   type: cf
   source:
     api: ((pcf-prod-api))
@@ -177,7 +177,7 @@ jobs:
       pipelinetaskname: deploy-shipping-to-stage
       deployversion: v1.0
       APP_REPO: git-shipping 
-  - put: pcf-stage
+  - put: cf-stage
     params:
       path: shipping-release-bucket/shipping-*.jar
       manifest: app-manifest-output/manifest.yml  
@@ -240,7 +240,7 @@ jobs:
       pipelinetaskname: deploy-shipping-to-prod
       deployversion: v1.0 
       APP_REPO: git-shipping      
-  - put: pcf-production
+  - put: cf-production
     params:
       path: shipping-release-bucket/shipping-*.jar
       manifest: app-manifest-output/manifest.yml 
